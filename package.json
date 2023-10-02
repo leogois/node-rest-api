@@ -7,7 +7,8 @@
     "start": "node src/index.js",
     "dev": "nodemon src/index.js",
     "migrations:add": "echo 'Migration name' && read migration_name && knex migrate:make $migration_name --knexfile=.knexfile.js",
-    "migrations:migrate": "knex migrate:latest --knexfile=.knexfile.js"
+    "migrations:migrate": "knex migrate:latest --knexfile=.knexfile.js",
+    "migrations:rollback": "knex migrate:rollback --knexfile=.knexfile.js"
   },
   "repository": {
     "type": "git",
@@ -26,7 +27,9 @@
   "dependencies": {
     "eslint": "^8.50.0",
     "express": "^4.18.2",
+    "express-jwt": "^8.4.1",
     "joi": "^17.10.2",
+    "jsonwebtoken": "^9.0.2",
     "knex": "^2.5.1",
     "mysql2": "^3.6.1",
     "pg": "^8.11.3",
