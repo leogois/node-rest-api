@@ -19,7 +19,7 @@ const swagger = immutable({
 })
 
 const database = immutable({
-    client: 'mysql',
+    client: 'mysql2',
     connection: process.env.DB_URL,
     migrations: immutable({
       tableName: 'migrations',
