@@ -1,15 +1,27 @@
+const { readFileSync } = require('fs')
+const { join } = require('path')
+
+const { load: loadYaml } = require('js-yaml')
+
 const immutable = Object.freeze
 
-const database = immutable({
+const loadOpenApiJson = () => {
+  const openApiPath = join(__dirname, '..', '..', 'docs', 'openapi.yml')
+  const openApiFileContent = readFileSync(openApiPath)
+  return loadYaml(openApiFileContent)
+}
 
+const swagger = immutable({
+  document: loadOpenApiJson(),
+  options: immutable({
+    explorer: false,
+  }),
+})
+
+const database = immutable({
     client: 'pg',
     version: '15.3',
-    connection: {
-      host: 'localhost',
-      user: 'postgres',
-      password: 'magno1982',
-      database: 'users',
-    },
+    connection: process.env.DB_URL,
     migrations: immutable({
       tableName: 'migrations',
     }),
@@ -31,6 +43,7 @@ const database = immutable({
 
 module.exports = {
   database,
+  swagger,
   encryption,
   jwt,
 }
