@@ -66,8 +66,8 @@ const SQLRepository = () => {
     knex.transaction(tx =>
       knex('users')
         .insert(encodeUser(user))
-        // .returning('*')
-        .then(([id]) => get(id, tx))
+        .returning('*')
+        // .then(([id]) => get(id, tx))
         .catch(handleUniqueUsernameError(user.username))
     )
 
